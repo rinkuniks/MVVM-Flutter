@@ -45,4 +45,12 @@ class Utils {
     current.unfocus();
     FocusScope.of(context).requestFocus(next);
   }
+
+  static double avgRating(List<int> rating){
+    var avg = 0;
+    for (int i = 0; i<rating.length; i++){
+      avg = avg+rating[i];
+    }
+    return double.parse((avg/rating.length).toStringAsFixed(1));
+  }
 }
