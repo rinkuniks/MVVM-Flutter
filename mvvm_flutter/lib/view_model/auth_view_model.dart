@@ -31,4 +31,22 @@ class AuthVieModel with ChangeNotifier{
       }
     });
   }
+
+  Future<void> singUpApi(dynamic data, BuildContext context) async {
+    setLoading(true);
+    _myRepo.signUpApi(data).then((value){
+      if (kDebugMode) {
+        setLoading(false);
+        Utils.flushBarErrorMessage("SingUp Successfully", context);
+        print(value.toString());
+        Navigator.pushNamed(context, RoutesNames.login);
+      }
+    }).onError((error, stackTrace){
+      if (kDebugMode) {
+        setLoading(false);
+        Utils.flushBarErrorMessage(error.toString(), context);
+        print(error.toString());
+      }
+    });
+  }
 }

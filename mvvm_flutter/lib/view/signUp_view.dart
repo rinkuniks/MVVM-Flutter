@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:mvvm_flutter/res/components/round_button.dart';
 import 'package:mvvm_flutter/utils/routes/routes_names.dart';
-import 'package:mvvm_flutter/utils/utils.dart';
-import 'package:mvvm_flutter/view_model/auth_view_model.dart';
 import 'package:provider/provider.dart';
 
-class LoginView extends StatefulWidget {
-  const LoginView({Key? key}) : super(key: key);
+import '../res/components/round_button.dart';
+import '../utils/utils.dart';
+import '../view_model/auth_view_model.dart';
+
+class SignUpView extends StatefulWidget {
+  const SignUpView({Key? key}) : super(key: key);
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  State<SignUpView> createState() => _SignUpViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
+class _SignUpViewState extends State<SignUpView> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   FocusNode emailFN = FocusNode();
@@ -34,7 +35,7 @@ class _LoginViewState extends State<LoginView> {
     final height = MediaQuery.of(context).size.height * 1;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
+        title: const Text('Sign Up'),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -81,7 +82,7 @@ class _LoginViewState extends State<LoginView> {
               height: height * 0.085,
             ),
             RoundButton(
-              title: "Login",
+              title: "Sign Up",
               loading: authViewModel.loading,
               onPress: () {
                 if (_emailController.text.isEmpty) {
@@ -96,11 +97,11 @@ class _LoginViewState extends State<LoginView> {
                 } else {
                   //Hit Api
                   Map data = {
-                    //email = eve.holt@reqres.in   pass = cityslicka
+                    //email = eve.holt@reqres.in   pass = pistol
                     'email': _emailController.text.toString(),
                     'password': _passwordController.text.toString(),
                   };
-                  authViewModel.loginApi(data, context);
+                  authViewModel.singUpApi(data, context);
                 }
               },
             ),
@@ -109,24 +110,9 @@ class _LoginViewState extends State<LoginView> {
             ),
             InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, RoutesNames.signUp);
-                }, child: const Text("Don't have an account? Sign Up")),
-
-            //Different Toast Messages to display
-            // Center(
-            //   child: InkWell(
-            //       onTap: (){
-            //         //Simple toast Message
-            //         // Utils.toastMessage("No Internet Connection");
-            //
-            //         //Show SnackBar
-            //         // Utils.snackBar('Internet not working...', context);
-            //
-            //         //Navigate to New page
-            //         // Navigator.pushNamed(context, RoutesNames.home);
-            //       },
-            //       child: const Text("Click Me")),
-            // )
+                  Navigator.pushNamed(context, RoutesNames.login);
+                },
+                child: const Text("Already have an account? Login")),
           ],
         ),
       ),
