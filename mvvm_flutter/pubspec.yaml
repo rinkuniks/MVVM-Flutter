@@ -39,6 +39,7 @@ dependencies:
   another_flushbar: ^1.12.29
   provider: ^6.0.4
   shared_preferences:
+  shimmer: ^2.0.0
 
 dev_dependencies:
   flutter_test:
